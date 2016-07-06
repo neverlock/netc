@@ -1,10 +1,8 @@
-.PHONY: build run
+net.a:
+	go build -buildmode=c-archive -o net.a net.go
 
-build-go:
-	go build -buildmode=c-shared -o libnet.dylib net.go
+http-server:net.a
+	gcc -pthread -o http-server http_server.c net.a
 
-build-c: build-go
-	clang -L. -lnet -o http-server http_server.c
-
-run: build-c
-	./http-server
+run: http-server
+	        ./http-server

@@ -4,7 +4,7 @@ package main
 
 typedef void (*handler_func)(void);
 
-inline void call_handler(handler_func fn) {
+extern inline void call_handler(handler_func fn) {
 	fn();
 }
 
